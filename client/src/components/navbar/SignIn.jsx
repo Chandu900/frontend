@@ -24,7 +24,7 @@ function SignIn() {
       return;
     }
     // Sending data to server
-    fetch("/signin", {
+    fetch("https://instaclone-bw0f.onrender.com/signin", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -40,10 +40,10 @@ function SignIn() {
           notifyA(data.error);
         } else {
           notifyB("Signed In Successfully");
-        
+
           localStorage.setItem("jwt", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
-          setUserLogin(true)
+          setUserLogin(true);
 
           // setUserLogin(true);
           navigate("/");

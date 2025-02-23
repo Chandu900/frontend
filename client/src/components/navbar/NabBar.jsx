@@ -6,10 +6,12 @@ import { LoginContext } from '../../context/loginContext';
 
 function NabBar({ login }) {
   const { setModalOpen } = useContext(LoginContext)
+
   
 
   const loginStatus = () => {
     const token = localStorage.getItem("jwt");
+    login=true;
     if (token || login) {
       return (
         <>

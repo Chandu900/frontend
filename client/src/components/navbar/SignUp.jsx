@@ -35,7 +35,7 @@ const notify = (msg) => toast.error(msg);
     }
 
     //sending data to server
-    fetch("/signup", {
+    fetch("https://instaclone-bw0f.onrender.com/signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -50,12 +50,11 @@ const notify = (msg) => toast.error(msg);
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          
-          notify(data.error)
+          notify(data.error);
           console.log(data);
         } else {
           notifyB(data.message);
-          nevigate("/signin")
+          nevigate("/signin");
         }
       });
   }

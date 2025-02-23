@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import profileImage from "../images/profile2.avif";
+import profileImage from "../images/defaultProfile.png";
 import './createpost.css';
 import defaultImage from '../images/default_image.webp';
 import { toast } from 'react-toastify';
@@ -28,7 +28,7 @@ function Createpost() {
 
   useEffect(() => {
     if (url) {
-      fetch("/createPost", {
+      fetch("https://instaclone-bw0f.onrender.com/createPost", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -45,8 +45,7 @@ function Createpost() {
             notifyA(data.error);
           } else {
             notifyB("Successfully Posted");
-            
-                       
+
             navigate("/");
           }
         })
@@ -83,32 +82,51 @@ function Createpost() {
     
     
   return (
-      <div className='createPost'>
-          <div className="post-header">
-              <h4 style={{ margin: "3px auto" }}>Create new post</h4>
-        <button id="post-btn" onClick={() => { postDetails() }}>Share</button>
-              
-                
+    <div className="createPost">
+      <div className="post-header">
+        <h4 style={{ margin: "3px auto" }}>Create new post</h4>
+        <button
+          id="post-btn"
+          onClick={() => {
+            postDetails();
+          }}
+        >
+          Share
+        </button>
+      </div>
+      {/* main-div */}
+      <div className="main-div">
+        <img id="target" src={defaultImage} alt="img" />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(event) => {
+            loadfile(event);
+            setImage(event.target.files[0]);
+          }}
+        />
+      </div>
+      {/* details */}
+      <div className="details">
+        <div className="card-header">
+          <div className="card-pic">
+            <img src={JSON.parse(localStorage.getItem('user')).photo?JSON.parse(localStorage.getItem('user')).photo:profileImage} alt="profile Image" />
           </div>
-          {/* main-div */}
-          <div className="main-div">
-              <img id='target' src={defaultImage} alt='img' />
-        <input type="file" accept='image/*' onChange={(event) => { loadfile(event); setImage(event.target.files[0])}}/>
-          </div>
-          {/* details */}
-          <div className="details">
-              <div className="card-header">
-                  <div className="card-pic">
-                      <img src={profileImage} alt="" />
-                  </div>
-                      <h5>Ramesh</h5>
-              </div>
-              <textarea value={body} onChange={(e)=>{setBody(e.target.value)}} type="text" name="" id="" placeholder='write a caption....'></textarea>
-          </div>
-          
-      
+          <h5>{JSON.parse(localStorage.getItem("user")).name}</h5>
+        </div>
+        <textarea
+          value={body}
+          onChange={(e) => {
+            setBody(e.target.value);
+          }}
+          type="text"
+          name=""
+          id=""
+          placeholder="Add a caption...."
+        ></textarea>
+      </div>
     </div>
-  )
+  );
 }
 
 export default Createpost

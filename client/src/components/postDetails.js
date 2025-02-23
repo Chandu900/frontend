@@ -15,7 +15,7 @@ export default function PostDetail({ item, toggleDetails }) {
     const removePost = (postId) => {
       console.log(postId)
     if (window.confirm("Do you really want to delete this post ?")) {
-      fetch(`/deletePost/${postId}`, {
+      fetch(`https://instaclone-bw0f.onrender.com/deletePost/${postId}`, {
         method: "delete",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -27,9 +27,10 @@ export default function PostDetail({ item, toggleDetails }) {
           toggleDetails();
           navigate("/");
           notifyB(result.message);
-        }).catch((err) => {
-            console.log(err)
         })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 

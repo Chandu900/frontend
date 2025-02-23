@@ -12,20 +12,27 @@ function UserProfile() {
     const { userId } = useParams()
     
   useEffect(() => {
-    fetch(`/user/${userId}`, {
+    fetch(`https://instaclone-bw0f.onrender.com/user/${userId}`, {
       headers: {
-        authorization:"Bearer "+localStorage.getItem('jwt')
-      }
-    }).then(res => res.json()).then((result) => {
-        console.log(result)
+        authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
         setUser(result.user);
-        setPosts(result.posts)
-        if (result.user.followUsers.includes(JSON.parse(localStorage.getItem('user'))._id)) {
-            setIsFollow(true)
+        setPosts(result.posts);
+        if (
+          result.user.followers.includes(
+            JSON.parse(localStorage.getItem("user"))._id
+          )
+        ) {
+          setIsFollow(true);
         }
-
-      
-    }).catch((err)=>{console.log("from fetch mypost:",err)})
+      })
+      .catch((err) => {
+        console.log("from fetch mypost:", err);
+      });
   }, [])
     
   // toggle for show
@@ -39,25 +46,26 @@ function UserProfile() {
 //   };
 
     const followUser = (userId) => {
-        fetch("/follow", {
+        fetch("https://instaclone-bw0f.onrender.com/follow", {
           method: "put",
           headers: {
             "Content-Type": "application/json",
             authorization: "Bearer " + localStorage.getItem("jwt"),
           },
           body: JSON.stringify({
-            followId:userId
+            followId: userId,
           }),
-        }).then(res => res.json()).then((data) =>
-        {
-            setIsFollow(true)
-            console.log(data)
         })
+          .then((res) => res.json())
+          .then((data) => {
+            setIsFollow(true);
+            console.log(data);
+          });
     }
 
     //unfollow
     const unfollowUser = (userId) => {
-      fetch("/unfollow", {
+      fetch("https://instaclone-bw0f.onrender.com/unfollow", {
         method: "put",
         headers: {
           "Content-Type": "application/json",
@@ -67,10 +75,12 @@ function UserProfile() {
           followId: userId,
         }),
       })
-          .then((res) => { return res.json() })
-          .then((data) => {
-            setIsFollow(false)
-          console.log(data);
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          setIsFollow(false);
+          
         });
     };
 
@@ -99,7 +109,7 @@ function UserProfile() {
           <div className="profile-info">
             <p>{posts.length} posts</p>
             <p>{user.followers?user.followers.length:"0"} followers</p>
-            <p>40 following</p>
+            <p>{ user.followers?user.followers.length:"0"}</p>
           </div>
         </div>
       </div>

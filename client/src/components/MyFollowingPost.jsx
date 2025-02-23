@@ -3,6 +3,8 @@ import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import defaultPhoto from "../images/defaultProfile.png";
+import { RiCloseLine } from "react-icons/ri";
 
 export default function MyFolliwngPost() {
   const navigate = useNavigate();
@@ -22,14 +24,14 @@ export default function MyFolliwngPost() {
     }
 
     // Fetching all posts
-    fetch("/myfollowingpost", {
+    fetch("https://instaclone-bw0f.onrender.com/myfollowingpost", {
       headers: {
         authorization: "Bearer " + localStorage.getItem("jwt"),
       },
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        
         setData(result);
       })
       .catch((err) => console.log(err));
@@ -46,7 +48,7 @@ export default function MyFolliwngPost() {
   };
 
   const likePost = (id) => {
-    fetch("/like", {
+    fetch("https://instaclone-bw0f.onrender.com/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +72,7 @@ export default function MyFolliwngPost() {
       });
   };
   const unlikePost = (id) => {
-    fetch("/unlike", {
+    fetch("https://instaclone-bw0f.onrender.com/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -96,7 +98,7 @@ export default function MyFolliwngPost() {
 
   // function to make comment
   const makeComment = (text, id) => {
-    fetch("/comment", {
+    fetch("https://instaclone-bw0f.onrender.com/comment", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -133,8 +135,10 @@ export default function MyFolliwngPost() {
             <div className="card-header">
               <div className="card-pic">
                 <img
-                  src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                  alt=""
+                  src={
+                    posts.postedBy.photo ? posts.postedBy.photo : defaultPhoto
+                  }
+                  alt="profile image"
                 />
               </div>
               <h5>
@@ -195,7 +199,8 @@ export default function MyFolliwngPost() {
                   setComment(e.target.value);
                 }}
               />
-              <button style={{marginLeft:"auto",marginRight:"2px"}}
+              <button
+                style={{ marginLeft: "auto", marginRight: "2px" }}
                 className="comment"
                 onClick={() => {
                   makeComment(comment, posts._id);
@@ -223,8 +228,10 @@ export default function MyFolliwngPost() {
               >
                 <div className="card-pic">
                   <img
-                    src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=500&q=60"
-                    alt=""
+                    src={
+                      item.postedBy.photo ? item.postedBy.photo : defaultPhoto
+                    }
+                    alt="Profile Image"
                   />
                 </div>
                 <h5>{item.postedBy.name}</h5>
@@ -285,9 +292,9 @@ export default function MyFolliwngPost() {
               toggleComment();
             }}
           >
-            <span className="material-symbols-outlined material-symbols-outlined-comment">
-              close
-            </span>
+            
+              <RiCloseLine className="material-symbols-outlined material-symbols-outlined-comment" >close</RiCloseLine>
+            
           </div>
         </div>
       )}

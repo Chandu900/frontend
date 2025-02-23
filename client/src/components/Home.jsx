@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import profileImage from '../images/profile.avif';
+import profileImage from '../images/defaultProfile.png';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
 import { IoCloseSharp } from "react-icons/io5";
@@ -11,7 +11,7 @@ function Home() {
   const [comment, setComment] = useState("");
   const [show, setShow] = useState(false);
   const [item, setItem] = useState();
-  let limit = 2;
+  let limit = 10;
   let skip = 0;
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function Home() {
   const handleScroll = () => {
     if (document.documentElement.clientHeight + window.pageYOffset >= document.documentElement.scrollHeight)
     {
-      skip = skip + 2;
+      skip = skip + 10;
     fetchPosts();
 
 
@@ -41,17 +41,18 @@ function Home() {
   
   const fetchPosts = () => {
     //fetching all post from database
-    fetch(`/allposts?limit=${limit}&skip=${skip}`, {
-      headers: {
-        authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
+    fetch(
+      `https://instaclone-bw0f.onrender.com/allposts?limit=${limit}&skip=${skip}`,
+      {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+      }
+    )
       .then((res) => res.json())
       .then((posts) => {
-        console.log(posts)
-        setData((data)=>[...data,...posts]);
-      
         
+        setData((data) => [...data, ...posts]);
       })
       .catch((err) => {
         console.log("error from feching all posts", err);
@@ -61,32 +62,7 @@ function Home() {
 
   //for like btn
   const likePost = (id) => {
-    fetch('/like', {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        authorization:"Bearer "+ localStorage.getItem('jwt')
-      },
-      body: JSON.stringify({
-        postId:id
-      })
-    }).then(res => res.json()).then((result) => {
-      const newData = data.map((posts) => {
-          if (posts._id == result._id) {
-            return result;
-          } else {
-            return posts;
-          }
-        })
-        setData(newData);
-    })
-      .catch((err) => {
-      console.log("error in like post :",err)
-    })
-  }
-  //unlike
-  const unlikePost = (id) => {
-    fetch("/unlike", {
+    fetch("https://instaclone-bw0f.onrender.com/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -104,16 +80,16 @@ function Home() {
           } else {
             return posts;
           }
-        })
+        });
         setData(newData);
-      }).catch((err) => {
-        console.log("Error in unlike:",err)
       })
-  };
-
-  //save comment in server
-  const makeComment = (text,id) => {
-    fetch("/comment", {
+      .catch((err) => {
+        console.log("error in like post :", err);
+      });
+  }
+  //unlike
+  const unlikePost = (id) => {
+    fetch("https://instaclone-bw0f.onrender.com/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -121,7 +97,35 @@ function Home() {
       },
       body: JSON.stringify({
         postId: id,
-        text:text
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const newData = data.map((posts) => {
+          if (posts._id == result._id) {
+            return result;
+          } else {
+            return posts;
+          }
+        });
+        setData(newData);
+      })
+      .catch((err) => {
+        console.log("Error in unlike:", err);
+      });
+  };
+
+  //save comment in server
+  const makeComment = (text,id) => {
+    fetch("https://instaclone-bw0f.onrender.com/comment", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postId: id,
+        text: text,
       }),
     })
       .then((res) => res.json())
@@ -135,7 +139,6 @@ function Home() {
           }
         });
         setData(newData);
-        
       })
       .catch((err) => {
         console.log("Error in saving comments:", err);
@@ -159,13 +162,20 @@ function Home() {
   return (
     <div className="home">
       {data.map((post) => {
+        
         const like = post.likes.length;
+        
+      
         return (
           <div className="card">
             {/* {card header} */}
             <div className="card-header">
               <div className="card-pic">
-                <img src={profileImage} alt="profile image" width={160} />
+                <img
+                  src={post.postedBy.photo?post.postedBy.photo:profileImage}
+                  alt="profile image"
+                  width={160}
+                />
               </div>
               <Link to={`/profile/${post.postedBy._id}`}>
                 <h5>{post.postedBy.name}</h5>
@@ -252,7 +262,7 @@ function Home() {
                   style={{ borderBottom: "1px solid #00000029" }}
                 >
                   <div className="card-pic">
-                    <img src={profileImage} alt="profile image" width={160} />
+                    <img src={item.postedBy.photo?item.postedBy.photo:profileImage} alt="profile image" width={160} />
                   </div>
                   <h5>{ item.postedBy.name}</h5>
                 </div>
