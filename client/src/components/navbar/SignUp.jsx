@@ -35,7 +35,7 @@ const notify = (msg) => toast.error(msg);
     }
 
     //sending data to server
-    fetch("/signup", {
+    fetch("https://instaclone-bw0f.onrender.com/signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
