@@ -52,11 +52,16 @@
     cursor: pointer;
     color: #339ce3;
     padding: 5px 8px;
-    border-radius: 1px;
+    border-radius: 2px;
     margin-left: auto;
 margin-right: 2px;
 
+
     
+}
+.post:hover{
+    background-color: #339ce3;
+    color: white;
 }
 .material-symbols-outlined-red {
     color: red;

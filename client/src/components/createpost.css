@@ -17,6 +17,11 @@
     font-weight: bolder;
     cursor: pointer;
 }
+#post-btn:hover{
+    background-color: #339ce3;
+    color: white;
+    border-radius: 2px 0 0 2px;
+}
 
 .details{
     border-top: 1px solid rgb(173, 173, 173) ;
