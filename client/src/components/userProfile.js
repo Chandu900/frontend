@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import profileImage from '../images/profile.avif';
+import profileImage from '../images/defaultProfile.png';
 import './navbar/profile.css'
 import PostDetail from './postDetails';
 import { useParams } from 'react-router-dom';
@@ -19,7 +19,7 @@ function UserProfile() {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        
         setUser(result.user);
         setPosts(result.posts);
         if (
@@ -59,7 +59,7 @@ function UserProfile() {
           .then((res) => res.json())
           .then((data) => {
             setIsFollow(true);
-            console.log(data);
+            
           });
     }
 
@@ -91,7 +91,7 @@ function UserProfile() {
       {/* profile frame */}
       <div className="profile-frame">
         <div className="profile-pic">
-          <img src={profileImage} alt="" />
+          <img src={user.photo?user.photo:profileImage} alt="" />
         </div>
         {/* profile data */}
         <div className="profile-data">

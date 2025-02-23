@@ -33,3 +33,15 @@ textarea{
     outline: none;
     margin-top: 5px;
 }
+@media screen and (max-width: 768px){
+    .createPost{
+        max-width: 300px;
+    }
+    textarea{
+        width: 90%;
+    }
+    #target{
+        width: 200px;
+    }
+    
+}

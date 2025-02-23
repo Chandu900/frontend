@@ -7,11 +7,12 @@
     justify-content: space-around;
     
     box-shadow: 1px 5px 5px #e0dcdc;
+    padding: 0 10px
 
 }
 .navbar ul{
     display: flex;
-    gap: 4px;
+    gap: 2px;
 
 }
 .navbar ul li{
@@ -24,6 +25,7 @@
     font-size: 18px;
     color: black;
 }
+
 /* logout */
 .primaryBtn{
     cursor: pointer;
@@ -41,4 +43,41 @@
 .primaryBtn:hover{
     transform: translateY(-5px);
     box-shadow: 0 10px 20px -10px rgba(219, 24, 44, 0.6);
+}
+#mobile-menu{
+    display: none;
+}
+
+
+@media screen and (max-width: 768px){
+    #insta-logo{
+        display: none;
+    }
+   .navbar .nav-menu{ 
+        display: none;
+    }
+    #mobile-menu{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        
+        align-items: center;
+        
+        
+    
+    }
+    .navbar{
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: #fff;
+        box-shadow: 0px 5px 5px #fff;
+        margin: 0;
+        padding: 0;
+    }
+    .navbar ul{
+        margin: 0;
+        padding: 10px 10px ;
+    }
 }
