@@ -1,5 +1,5 @@
 import {useState,useContext,} from 'react';
-import '../navbar/SignIn.css';
+import './SignIn.css';
 import logo from '../../images/instaLogo.png'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";

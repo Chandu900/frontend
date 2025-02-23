@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import logo from '../../images/instaLogo.png'
-import '../../components/navbar/SignUp.css';
+import './SignUp.css';
 import { Link ,useNavigate} from 'react-router-dom';
 import { toast} from "react-toastify";
 
