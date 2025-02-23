@@ -22,7 +22,7 @@ export default function MyFolliwngPost() {
     }
 
     // Fetching all posts
-    fetch("/myfollowingpost", {
+    fetch("https://instaclone-bw0f.onrender.com/myfollowingpost", {
       headers: {
         authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -46,7 +46,7 @@ export default function MyFolliwngPost() {
   };
 
   const likePost = (id) => {
-    fetch("/like", {
+    fetch("https://instaclone-bw0f.onrender.com/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export default function MyFolliwngPost() {
       });
   };
   const unlikePost = (id) => {
-    fetch("/unlike", {
+    fetch("https://instaclone-bw0f.onrender.com/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -96,7 +96,7 @@ export default function MyFolliwngPost() {
 
   // function to make comment
   const makeComment = (text, id) => {
-    fetch("/comment", {
+    fetch("https://instaclone-bw0f.onrender.com/comment", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
