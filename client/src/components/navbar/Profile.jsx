@@ -15,6 +15,7 @@ const defaultPic =
     "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/99d73356-a5c8-465b-9e77-6f96cbd836ee/defmyc8-7cbff1dd-1506-4bbc-8f24-90201b6ff243.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk5ZDczMzU2LWE1YzgtNDY1Yi05ZTc3LTZmOTZjYmQ4MzZlZVwvZGVmbXljOC03Y2JmZjFkZC0xNTA2LTRiYmMtOGYyNC05MDIwMWI2ZmYyNDMucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0._Lk2s-kgFiK2SRrfHgY7FQ9FamdOv3rqGBJ9o6bB23o";
 
   useEffect(() => {
+<<<<<<< HEAD
     fetch(
       `https://instaclone-bw0f.onrender.com/user/${
         JSON.parse(localStorage.getItem("user"))._id
@@ -23,6 +24,11 @@ const defaultPic =
         headers: {
           authorization: "Bearer " + localStorage.getItem("jwt"),
         },
+=======
+    fetch(`https://instaclone-bw0f.onrender.com/user/${JSON.parse(localStorage.getItem("user"))._id}`, {
+      headers: {
+        authorization:"Bearer "+localStorage.getItem('jwt')
+>>>>>>> 67c3f8784f3b607091c9e50b3b3933536ca48b39
       }
     )
       .then((res) => res.json())

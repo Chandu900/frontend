@@ -41,6 +41,7 @@ function Home() {
   
   const fetchPosts = () => {
     //fetching all post from database
+<<<<<<< HEAD
     fetch(
       `https://instaclone-bw0f.onrender.com/allposts?limit=${limit}&skip=${skip}`,
       {
@@ -49,6 +50,13 @@ function Home() {
         },
       }
     )
+=======
+    fetch(`https://instaclone-bw0f.onrender.com/allposts?limit=${limit}&skip=${skip}`, {
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+>>>>>>> 67c3f8784f3b607091c9e50b3b3933536ca48b39
       .then((res) => res.json())
       .then((posts) => {
         
@@ -62,7 +70,36 @@ function Home() {
 
   //for like btn
   const likePost = (id) => {
+<<<<<<< HEAD
     fetch("https://instaclone-bw0f.onrender.com/like", {
+=======
+    fetch('https://instaclone-bw0f.onrender.com/like', {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        authorization:"Bearer "+ localStorage.getItem('jwt')
+      },
+      body: JSON.stringify({
+        postId:id
+      })
+    }).then(res => res.json()).then((result) => {
+      const newData = data.map((posts) => {
+          if (posts._id == result._id) {
+            return result;
+          } else {
+            return posts;
+          }
+        })
+        setData(newData);
+    })
+      .catch((err) => {
+      console.log("error in like post :",err)
+    })
+  }
+  //unlike
+  const unlikePost = (id) => {
+    fetch("https://instaclone-bw0f.onrender.com/unlike", {
+>>>>>>> 67c3f8784f3b607091c9e50b3b3933536ca48b39
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -83,6 +120,7 @@ function Home() {
         });
         setData(newData);
       })
+<<<<<<< HEAD
       .catch((err) => {
         console.log("error in like post :", err);
       });
@@ -90,6 +128,13 @@ function Home() {
   //unlike
   const unlikePost = (id) => {
     fetch("https://instaclone-bw0f.onrender.com/unlike", {
+=======
+  };
+
+  //save comment in server
+  const makeComment = (text,id) => {
+    fetch("https://instaclone-bw0f.onrender.com/comment", {
+>>>>>>> 67c3f8784f3b607091c9e50b3b3933536ca48b39
       method: "put",
       headers: {
         "Content-Type": "application/json",
