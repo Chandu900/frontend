@@ -28,7 +28,7 @@ function Createpost() {
 
   useEffect(() => {
     if (url) {
-      fetch("/createPost", {
+      fetch("https://instaclone-bw0f.onrender.com/createPost", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
