@@ -24,7 +24,7 @@ function SignIn() {
       return;
     }
     // Sending data to server
-    fetch("/signin", {
+    fetch("https://instaclone-bw0f.onrender.com/signin", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
