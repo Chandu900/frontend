@@ -63,3 +63,26 @@
     width: 392px;
     box-sizing: border-box;
 }
+@media screen and (max-width: 480px){
+    .form-container{
+        background-color: #ffffff4d;
+        color: white;
+    }
+    .form2{
+        background-color: #ffffff4d;
+        color: white;
+    }
+    .loginPara{
+        color: white;
+    }
+    .form input{
+        background-color: #ffffff4d;
+        color: white;
+        border: none;
+    }
+    .form-container, .form2{
+        width: 100wv;
+        border: none;
+    }
+}
+
