@@ -29,7 +29,7 @@ export default function ProfilePic({ changeprofile }) {
 
   const postPic = () => {
     // saving post to mongodb
-    fetch("/uploadProfilePic", {
+    fetch("https://instaclone-bw0f.onrender.com/uploadProfilePic", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
