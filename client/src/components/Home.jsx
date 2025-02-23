@@ -41,7 +41,7 @@ function Home() {
   
   const fetchPosts = () => {
     //fetching all post from database
-    fetch(`/allposts?limit=${limit}&skip=${skip}`, {
+    fetch(`https://instaclone-bw0f.onrender.com/allposts?limit=${limit}&skip=${skip}`, {
       headers: {
         authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -61,7 +61,7 @@ function Home() {
 
   //for like btn
   const likePost = (id) => {
-    fetch('/like', {
+    fetch('https://instaclone-bw0f.onrender.com/like', {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -86,7 +86,7 @@ function Home() {
   }
   //unlike
   const unlikePost = (id) => {
-    fetch("/unlike", {
+    fetch("https://instaclone-bw0f.onrender.com/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +113,7 @@ function Home() {
 
   //save comment in server
   const makeComment = (text,id) => {
-    fetch("/comment", {
+    fetch("https://instaclone-bw0f.onrender.com/comment", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
