@@ -12,7 +12,7 @@ function UserProfile() {
     const { userId } = useParams()
     
   useEffect(() => {
-    fetch(`/user/${userId}`, {
+    fetch(`https://instaclone-bw0f.onrender.com/user/${userId}`, {
       headers: {
         authorization:"Bearer "+localStorage.getItem('jwt')
       }
@@ -39,7 +39,7 @@ function UserProfile() {
 //   };
 
     const followUser = (userId) => {
-        fetch("/follow", {
+        fetch("https://instaclone-bw0f.onrender.com/follow", {
           method: "put",
           headers: {
             "Content-Type": "application/json",
@@ -57,7 +57,7 @@ function UserProfile() {
 
     //unfollow
     const unfollowUser = (userId) => {
-      fetch("/unfollow", {
+      fetch("https://instaclone-bw0f.onrender.com/unfollow", {
         method: "put",
         headers: {
           "Content-Type": "application/json",
